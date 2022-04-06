@@ -210,12 +210,13 @@ def submit():
         # debug for submit issue
         print('*** reset driver ***')
         driver = get_driver()
-        handle = driver.current_window_handle
+        # handle = driver.current_window_handle
         driver.service.stop()
         time.sleep(6)
         driver = webdriver.Chrome()
-        driver.switch_to.window(handle)
+        # driver.switch_to.window(handle)
         set_driver(driver)
+        get_driver()
         print('- title:', Window().title)
 
 
@@ -385,8 +386,15 @@ def funcCAPTCHA():
 block = False
 print('- Hax loading...')
 
-start_chrome(url=urlLogin)
-
+#start_chrome(url=urlLogin)
+options = webdriver.ChromeOptions()
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option('useAutomationExtension', False)
+options.add_argument("--disable-blink-features=AutomationControlled")
+driver = webdriver.Chrome(options=options)
+driver.get(urlLogin)
+set_driver(driver)
+get_driver()
 print('- title:', Window().title)
 # # 向下滚动
 # scroll_down(num_pixels=550)

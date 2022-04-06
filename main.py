@@ -126,7 +126,9 @@ def getaudiolink():
         block = True
     else:
         print('*** audio download element not found,return to func renew ***')
-        renewVPS()
+        refresh()
+        login()
+        #renewVPS()
 
 def reCAPTCHA():
     global block

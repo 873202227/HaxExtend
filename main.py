@@ -209,20 +209,6 @@ def submit():
         set_driver(driver)
         print('- title:', Window().title)
 
-        # driver.get_screenshot_as_file(os.getcwd()+imgFile)
-        # print('- screenshot done')
-        # driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
-        # switch_to('白嫖图床')
-        # driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
-        # time.sleep(4)
-        # click('上传')
-        # wait_until(Text('完成').exists)
-        # print('- upload done')
-        # # textList = find_all(S('#code-url'))
-        # # result = [key.web_element.text for key in textList][0]
-        # result = S('#code-url').web_element.text
-        # print('*** capture src:', result)
-        # kill_browser()
 
 
     try:
@@ -244,11 +230,28 @@ def submit():
         renewVPS()
     except:
         print('- title:', Window().title)
+        screenshot()
         body = ' *** 💣 some error in func submit!, stop running ***'
         # login()
         push(body)
         print(body)
         kill_browser()
+
+def screenshot():
+    driver = get_driver()
+    driver.get_screenshot_as_file(os.getcwd() + imgFile)
+    print('- screenshot done')
+    driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
+    switch_to('白嫖图床')
+    driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
+    time.sleep(4)
+    click('上传')
+    wait_until(Text('完成').exists)
+    print('- upload done')
+    # textList = find_all(S('#code-url'))
+    # result = [key.web_element.text for key in textList][0]
+    result = S('#code-url').web_element.text
+    print('*** capture src:', result)
 
 
 def renewVPS():

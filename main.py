@@ -207,6 +207,7 @@ def submit():
         driver = webdriver.Chrome()
         driver.switch_to.window(handle)
         set_driver(driver)
+        print('- title:', Window().title)
 
         # driver.get_screenshot_as_file(os.getcwd()+imgFile)
         # print('- screenshot done')

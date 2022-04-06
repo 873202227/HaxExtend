@@ -200,14 +200,17 @@ def submit():
         # debug for submit issue
         driver = get_driver()
         driver.get_screenshot_as_file(os.getcwd()+imgFile)
+        print('- screenshot done')
         driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
         switch_to('白嫖图床')
         driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
         time.sleep(4)
         click('上传')
         wait_until(Text('完成').exists)
-        textList = find_all(S('#code-url'))
-        result = [key.web_element.text for key in textList][0]
+        print('- upload done')
+        # textList = find_all(S('#code-url'))
+        # result = [key.web_element.text for key in textList][0]
+        result = S('#code-url').web_element.text
         print('*** capture src:', result)
         kill_browser()
 

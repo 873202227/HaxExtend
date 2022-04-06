@@ -63,6 +63,8 @@ def speechToText():
     driver = get_driver()
     driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
     switch_to('Speech to Text')
+    # # 向下滚动
+    scroll_down(num_pixels=400)
     text = ''
     i = 0
     while text == '':

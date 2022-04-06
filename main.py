@@ -82,6 +82,51 @@ def speechToText():
     driver.close()
     return text
 
+def getaudiolink():
+    global block
+    print('- audio file link searching...')
+    if Text('Alternatively, download audio as MP3').exists() or Text('或者以 MP3 格式下载音频').exists():
+        block = False
+        try:
+            src = Link('Alternatively, download audio as MP3').href
+        except:
+            src = Link('或者以 MP3 格式下载音频').href
+        print('- get src:', src)
+        # 关闭证书验证
+        ssl._create_default_https_context = ssl._create_unverified_context
+        # 下载音频文件
+        urllib.request.urlretrieve(src, os.getcwd() + audioFile)
+        time.sleep(4)
+        text = speechToText()
+        print('- waiting for switch to hax window')
+
+        # 切回第一个 tab
+        driver = get_driver()
+        driver.switch_to.window(driver.window_handles[0])
+        # time.sleep(3)
+        wait_until(S('#audio-response').exists)
+        print('- fill audio response')
+        write(text, into=S('#audio-response'))
+        # time.sleep(3)
+        wait_until(S('#recaptcha-verify-button').exists)
+        print('- click recaptcha verify button')
+        click(S('#recaptcha-verify-button'))
+        time.sleep(3)
+        if Text('Multiple correct solutions required - please solve more.').exists() or Text(
+                '需要提供多个正确答案 - 请回答更多问题。').exists():
+            print('*** Multiple correct solutions required - please solve more. ***')
+            getaudiolink()
+        time.sleep(1)
+
+    elif Text('Try again later').exists() or Text('稍后重试').exists():
+        textblock = S('.rc-doscaptcha-body-text').web_element.text
+        print(textblock)
+        body = ' *** 💣 Possibly blocked by google! ***\n' + textblock
+        push(body)
+        block = True
+    else:
+        print('*** audio download element not found,return to func renew ***')
+        renewVPS()
 
 def reCAPTCHA():
     global block
@@ -92,45 +137,7 @@ def reCAPTCHA():
         print('- audio button found')
         click(S('#recaptcha-audio-button'))
         time.sleep(3)
-        print('- audio file link searching...')
-        if Text('Alternatively, download audio as MP3').exists() or Text('或者以 MP3 格式下载音频').exists():
-            block = False
-            try:
-                src = Link('Alternatively, download audio as MP3').href
-            except:
-                src = Link('或者以 MP3 格式下载音频').href
-            print('- get src:', src)
-            # 关闭证书验证
-            ssl._create_default_https_context = ssl._create_unverified_context
-            # 下载音频文件
-            urllib.request.urlretrieve(src, os.getcwd() + audioFile)
-            time.sleep(4)
-            text = speechToText()
-            print('- waiting for switch to hax window')
-
-            # 切回第一个 tab
-            driver = get_driver()
-            driver.switch_to.window(driver.window_handles[0])
-            #time.sleep(3)
-            wait_until(S('#audio-response').exists)
-            print('- fill audio response')
-            write(text, into=S('#audio-response'))
-            #time.sleep(3)
-            wait_until(S('#recaptcha-verify-button').exists)
-            print('- click recaptcha verify button')
-            click(S('#recaptcha-verify-button'))
-            time.sleep(1)
-
-        elif Text('Try again later').exists() or Text('稍后重试').exists():
-            textblock = S('.rc-doscaptcha-body-text').web_element.text
-            print(textblock)
-            body = ' *** 💣 Possibly blocked by google! ***\n' + textblock
-            push(body)
-            block = True
-            break
-        else:
-            print('*** audio download element not found,return to func renew ***')
-            renewVPS()
+        getaudiolink()
     return block
 
 
@@ -177,9 +184,11 @@ def submit():
     driver = get_driver()
     driver.execute_script('''window.open('',"_blank")''')
     driver.switch_to.window(driver.window_handles[1])
-    print('-', Window().title)
+    driver.close()
     time.sleep(4)
     driver.switch_to.window(driver.window_handles[0])
+    set_driver(driver)
+    get_driver()
     print('-', Window().title)
     #print('- title:', Window().title)
 
@@ -296,10 +305,11 @@ def renewVPS():
         print('- extend result:', body)
         push(body)
         time.sleep(2)
-        kill_browser()
+        #kill_browser()
     else:
         #renewVPS()
-        kill_browser()
+        #kill_browser()
+        print('- else')
 
 
 def extendResult():

@@ -173,9 +173,14 @@ def submit():
     scroll_down(num_pixels=500)
     click('Submit')
     print('- submit clicked')
-
-    time.sleep(6)
-    print('- title:', Window().title)
+    driver = get_driver()
+    driver.execute_script('''window.open('',"_blank")''')
+    driver.switch_to.window(driver.window_handles[1])
+    print('-', Window().title)
+    time.sleep(4)
+    driver.switch_to.window(driver.window_handles[0])
+    print('-', Window().title)
+    #print('- title:', Window().title)
 
     # i = 0
     # while Window().title == 'Just a moment...':

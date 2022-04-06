@@ -197,7 +197,7 @@ def submit():
         driver.get_screenshot_as_file(os.getcwd()+imgFile)
         driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
         switch_to('白嫖图床')
-        driver.find_element(By.ID, 'image').send_keys('os.getcwd()+imgFile')
+        driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
         time.sleep(4)
         click('上传')
         wait_until(Text('完成').exists)

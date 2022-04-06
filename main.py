@@ -8,6 +8,7 @@ import urllib
 
 import requests
 from helium import *
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 try:
@@ -198,21 +199,29 @@ def submit():
 
     if Window().title == 'Just a moment...':
         # debug for submit issue
+        print('*** reset driver ***')
         driver = get_driver()
-        driver.get_screenshot_as_file(os.getcwd()+imgFile)
-        print('- screenshot done')
-        driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
-        switch_to('白嫖图床')
-        driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
-        time.sleep(4)
-        click('上传')
-        wait_until(Text('完成').exists)
-        print('- upload done')
-        # textList = find_all(S('#code-url'))
-        # result = [key.web_element.text for key in textList][0]
-        result = S('#code-url').web_element.text
-        print('*** capture src:', result)
-        kill_browser()
+        handle = driver.current_window_handle
+        driver.service.stop()
+        time.sleep(6)
+        driver = webdriver.Chrome()
+        driver.switch_to.window(handle)
+        set_driver(driver)
+
+        # driver.get_screenshot_as_file(os.getcwd()+imgFile)
+        # print('- screenshot done')
+        # driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
+        # switch_to('白嫖图床')
+        # driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
+        # time.sleep(4)
+        # click('上传')
+        # wait_until(Text('完成').exists)
+        # print('- upload done')
+        # # textList = find_all(S('#code-url'))
+        # # result = [key.web_element.text for key in textList][0]
+        # result = S('#code-url').web_element.text
+        # print('*** capture src:', result)
+        # kill_browser()
 
 
     try:

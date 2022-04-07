@@ -70,7 +70,8 @@ def speechToText():
     driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
     switch_to('Speech to Text')
     # # 向下滚动
-    scroll_down(num_pixels=400)
+    scroll_down(num_pixels=800)
+    
     text = ''
     i = 0
     while text == '':
@@ -165,7 +166,7 @@ def login():
     
         
     # # 向下滚动
-    scroll_down(num_pixels=240)
+    #scroll_down(num_pixels=240)
     
     wait_until(Text('Login to Hax.co.id').exists)
     # else:
@@ -188,7 +189,7 @@ def login():
         block = reCAPTCHA()
         if block:
             print('*** Possibly blocked by google! ***')
-            kill_broowser()
+            #kill_broowser()
         else:
             submit()
     else:
@@ -225,12 +226,12 @@ def submit():
         renewVPS()
     except:
         print('- title:', Window().title)
-        screenshot() # debug
         body = ' *** 💣 some error in func submit!, stop running ***'
         # login()
         #push(body)
         print(body)
-        kill_browser()
+        screenshot() # debug
+        #kill_browser()
 
 def screenshot(): # debug
     driver = get_driver()
@@ -257,8 +258,10 @@ def renewVPS():
     print('- renew VPS')
     go_to(urlRenew)
     time.sleep(1)
+    cloudflareDT()
     # 向下滚动
-    scroll_down(num_pixels=900)
+    scroll_down(num_pixels=930)
+    
     time.sleep(1)
     if S('#web_address').exists():
         print('- fill web address')
@@ -275,15 +278,12 @@ def renewVPS():
             if block:
                 textList = find_all(S('.rc-doscaptcha-body-text'))
                 result = [key.web_element.text for key in textList][0]
-                print('*** Possibly blocked by google! ***')
-                print(result)
                 body = '*** Possibly blocked by google! ***'
-                # renewVPS()
+                print(body, '\n', result)
+                #renewVPS()
                 push(body)
-                kill_browser()
+                #kill_browser()
             else:
-                # 向下滚动
-                scroll_down(num_pixels=200)
                 click('Renew VPS')
         else:
             print('- reCAPTCHA not found!')
@@ -293,18 +293,22 @@ def renewVPS():
             body = '🎉 ' + body
         print('- extend result:', body)
         push(body)
-        time.sleep(2)
+        #time.sleep(2)
         #kill_browser()
     else:
         #renewVPS()
         #kill_browser()
-        print('- else')
+        print(' *** 💣 some error in func renew!, stop running ***')
+        screenshot()
 
 
 def extendResult():
     print('- waiting for extend result response')
     time.sleep(10)
     if S('#response').exists():
+        # 向下滚动
+        scroll_down(num_pixels=300)
+        
         textList = find_all(S('#response'))
         result = [key.web_element.text for key in textList][0]
     else:
@@ -350,12 +354,8 @@ def funcCAPTCHA():
     method = [key.web_element.text for key in divList][0][0]
     # Helium 下没有好的方法拿到两个小图片的 src，切换到 selenium
     driver = get_driver()
-    number1 = int(
-        driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[1]').get_attribute('src').split('-')[1][
-            0])
-    number2 = int(
-        driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[2]').get_attribute('src').split('-')[1][
-            0])
+    number1 = int(driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[1]').get_attribute('src').split('-')[1][0])
+    number2 = int(driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[2]').get_attribute('src').split('-')[1][0])
 
     if method == '+':
         captcha_result = number1 + number2
@@ -373,7 +373,6 @@ def funcCAPTCHA():
 
 block = False
 print('- Hax loading...')
-
 #start_chrome(url=urlLogin)
 
 if __name__ == "__main__":
@@ -394,6 +393,6 @@ if __name__ == "__main__":
     click(S('.recaptcha-checkbox-borderAnimation'))
     print('- title:', Window().title)
     time.sleep(2)
-    screenshot()
+    #screenshot()
     
-    #login()
+    login()

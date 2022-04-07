@@ -150,18 +150,18 @@ def reCAPTCHA():
         getaudiolink()
     return block
 
-
-def login():
-    print('- login')
-    time.sleep(1)
-    # if S('@username').exists() is False:
-    #     go_to(urlLogin)
-    #     login()
+def cloudflareDT():
     if Window().title == 'Just a moment...':
         # debug for submit issue
         print('*** cloudflare detection ***')
         time.sleep(7)
         print('- title after:', Window().title)
+
+def login():
+    print('- login')
+    time.sleep(1)
+    cloudflareDT()
+    
         
     # # 向下滚动 400
     scroll_down(num_pixels=400)
@@ -387,6 +387,7 @@ if __name__ == "__main__":
     set_driver(driver)
     get_driver()
     go_to(urlLogin)
+    
     cloudflareDT()
     # 向下滚动
     scroll_down(num_pixels=480)

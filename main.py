@@ -397,12 +397,14 @@ def funcCAPTCHA():
     return captcha_result
 
 block = False
+CHROME_DRIVER_PATH = '/usr/local/share/chrome_driver'
+
 print('- Hax loading...')
 #start_chrome(url=urlLogin)
 
 if __name__ == "__main__":
     #uc.TARGET_VERSION = 99
-    driver = uc.Chrome()
+    driver = uc.Chrome(executable_path=CHROME_DRIVER_PATH)
     #driver.maximize_window()
     driver.set_window_size(940, 900)
     #driver.get(url)

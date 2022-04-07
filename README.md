@@ -9,7 +9,7 @@ workflow 上的浏览器没有广告屏蔽，得重新处理遮罩对元素定�
 ||||
 
 #### 状态
-- 已知 BUG，submit 提交后页面刷新到 VPS Information 的过程中大概率出现问题，导致下一步renew 无法进行。
+- 
 
 #### 项目进度
 - 0330 添加了 tg push，`func submit` 也还有些 ~~小~~ 问题

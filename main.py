@@ -371,6 +371,7 @@ print('- Hax loading...')
 # # 向下滚动
 # scroll_down(num_pixels=550)
 if __name__ == "__main__":
+    webdriver.TARGET_VERSION = 99
     driver = webdriver.Chrome()
     #driver.get(url)
     set_driver(driver)

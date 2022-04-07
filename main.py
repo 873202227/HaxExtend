@@ -163,9 +163,9 @@ def login():
     # # 向下滚动
     scroll_down(num_pixels=550)
     
-    screenshot() # debug
+    #screenshot() # debug
         
-    wait_until(Text('Login to Hax.co.id').exists)
+    #wait_until(Text('Login to Hax.co.id').exists)
     # else:
     print('- fill user id')
     if USER_ID == '':

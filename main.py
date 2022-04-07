@@ -6,7 +6,7 @@ import ssl
 import time
 import urllib
 import requests
-import undetected_chromedriver as uc
+import undetected_chromedriver.v2 as uc
 
 from helium import *
 #from selenium import webdriver

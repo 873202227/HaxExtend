@@ -146,19 +146,13 @@ def reCAPTCHA():
     click(S('.recaptcha-checkbox-borderAnimation'))
     #screenshot() # debug
     delay(4)
-    i = 0
-    while S('#recaptcha-audio-button').exists():
-        i = i + 1
-        if i > 3:
-            print('*** recaptcha issue! ***')
-            screenshot()
-            break
+    if S('#recaptcha-audio-button').exists():
         print('- audio button found')
         click(S('#recaptcha-audio-button'))
         #screenshot() # debug
         delay(4)
         getaudiolink()
-    return block
+        return block
 
 def cloudflareDT():
     if Window().title == 'Just a moment...':

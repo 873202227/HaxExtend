@@ -212,6 +212,15 @@ def submit():
     time.sleep(2)
 
     cloudflareDT()
+    try:
+        print('- try go to vps-info')
+        go_to(urlInfo)
+        print('- title:', Window().title)
+        cloudflareDT()
+        print('- title:', Window().title)
+
+    except:
+        pass
 
     try:
         wait_until(Text('Please correct your captcha!.').exists)

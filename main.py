@@ -387,6 +387,10 @@ if __name__ == "__main__":
     set_driver(driver)
     get_driver()
     go_to(urlLogin)
+    cloudflareDT()
+    # 向下滚动
+    scroll_down(num_pixels=480)
+    
     print('- title:', Window().title)
     screenshot()
     time.sleep(2)

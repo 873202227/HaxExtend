@@ -60,14 +60,14 @@ def switchToWindowSpeechToText():
         switch_to('Speech to Text')
     else:
         # Selenium open a new window
-        #driver = get_driver()
+        driver = get_driver()
         #driver.tab_new(urlSpeech)
         driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
         switch_to('Speech to Text')
 
 def speechToText():
     # switchToWindowSpeechToText()
-    #driver = get_driver()
+    driver = get_driver()
     #driver.tab_new(urlSpeech)
     driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
     switch_to('Speech to Text')
@@ -261,7 +261,7 @@ def delay(i):
     time.sleep(i)
 
 def screenshot(): # debug
-    #driver = get_driver()
+    driver = get_driver()
     driver.get_screenshot_as_file(os.getcwd() + imgFile)
     print('- screenshot done')
     #driver.tab_new(urlMJJ)

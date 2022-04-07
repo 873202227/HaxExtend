@@ -61,12 +61,16 @@ def switchToWindowSpeechToText():
     else:
         # Selenium open a new window
         #driver = get_driver()
-        driver.tab_new(urlSpeech)
+        #driver.tab_new(urlSpeech)
+        driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
+        switch_to('Speech to Text')
 
 def speechToText():
     # switchToWindowSpeechToText()
     #driver = get_driver()
-    driver.tab_new(urlSpeech)
+    #driver.tab_new(urlSpeech)
+    driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
+    switch_to('Speech to Text')
 
     # # 向下滚动
     scroll_down(num_pixels=800)
@@ -260,7 +264,9 @@ def screenshot(): # debug
     #driver = get_driver()
     driver.get_screenshot_as_file(os.getcwd() + imgFile)
     print('- screenshot done')
-    driver.tab_new(urlMJJ)
+    #driver.tab_new(urlMJJ)
+    driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
+    switch_to('白嫖图床')
     delay(2)
     driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
     delay(4)

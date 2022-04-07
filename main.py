@@ -139,10 +139,12 @@ def reCAPTCHA():
     global block
     print('- click checkbox')
     click(S('.recaptcha-checkbox-borderAnimation'))
+    screenshot() # debug
     time.sleep(3)
     while S('#recaptcha-audio-button').exists():
         print('- audio button found')
         click(S('#recaptcha-audio-button'))
+        screenshot() # debug
         time.sleep(3)
         getaudiolink()
     return block
@@ -249,6 +251,9 @@ def screenshot(): # debug
     # result = [key.web_element.text for key in textList][0]
     result = S('#code-url').web_element.text
     print('*** capture src:', result)
+    driver.close()
+    driver.switch_to.window(driver.window_handles[0])
+
 
 
 def renewVPS():

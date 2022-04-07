@@ -163,12 +163,10 @@ def login():
         time.sleep(7)
         print('- title after:', Window().title)
         
-    # # 向下滚动
-    scroll_down(num_pixels=550)
+    # # 向下滚动 400
+    scroll_down(num_pixels=400)
     
-    #screenshot() # debug
-        
-    #wait_until(Text('Login to Hax.co.id').exists)
+    wait_until(Text('Login to Hax.co.id').exists)
     # else:
     print('- fill user id')
     if USER_ID == '':
@@ -384,9 +382,12 @@ print('- Hax loading...')
 if __name__ == "__main__":
     webdriver.TARGET_VERSION = 99
     driver = webdriver.Chrome()
+    driver.maximize_window()
     #driver.get(url)
     set_driver(driver)
     get_driver()
     go_to(urlLogin)
     print('- title:', Window().title)
-    login()
+    screenshot()
+    time.sleep(2)
+    #login()

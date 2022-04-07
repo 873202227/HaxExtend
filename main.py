@@ -401,7 +401,7 @@ print('- Hax loading...')
 #start_chrome(url=urlLogin)
 
 if __name__ == "__main__":
-    uc.TARGET_VERSION = 99
+    #uc.TARGET_VERSION = 99
     driver = uc.Chrome()
     #driver.maximize_window()
     driver.set_window_size(940, 900)
@@ -409,6 +409,7 @@ if __name__ == "__main__":
     set_driver(driver)
     get_driver()
     #go_to(urlLogin)
+    print('cloudflare detection test')
     go_to('https://nowsecure.nl')
     print('- title before:', Window().title)
     delay(10)

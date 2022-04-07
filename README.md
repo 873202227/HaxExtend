@@ -1,12 +1,9 @@
 # [![HaxExtend](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml)
 #### Dev 记录
-workflow 上的浏览器没有广告屏蔽，得重新处理遮罩对元素定位的影响
-|模块|问题/现象|思路|
-|---|---|---|
-|submit|cloud flare 5s|undetected_chromedriver|
-|login|异常跳转，audio 元素找不到|遮挡问题|
-||||
-||||
+##### To Do List
+- [ ] cloud flare 5s, undetected_chromedriver 难搞哦
+- [x] login, 异常跳转,audio 元素找不到, 元素遮挡问题
+
 
 #### 状态
 - 

@@ -164,11 +164,14 @@ def login():
     # CF
     cloudflareDT()
     
-        
-    # # 向下滚动
-    #scroll_down(num_pixels=240)
-    
     wait_until(Text('Login to Hax.co.id').exists)
+
+    i = 0
+    while Text('Submit').exists() == False:
+        # 向下滚动
+        scroll_down(num_pixels=50)
+        print('- 50px *', i+1)
+
     # else:
     print('- fill user id')
     if USER_ID == '':
@@ -384,15 +387,5 @@ if __name__ == "__main__":
     set_driver(driver)
     get_driver()
     go_to(urlLogin)
-    
-    cloudflareDT()
-    # 向下滚动
-    scroll_down(num_pixels=480)
     time.sleep(2)
-    #print('- click checkbox')
-    #click(S('.recaptcha-checkbox-borderAnimation'))
-    print('- title:', Window().title)
-    time.sleep(2)
-    #screenshot()
-    
     login()

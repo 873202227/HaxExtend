@@ -6,7 +6,7 @@ import ssl
 import time
 import urllib
 import requests
-import undetected_chromedriver as webdriver
+import undetected_chromedriver as uc
 
 from helium import *
 #from selenium import webdriver
@@ -392,8 +392,8 @@ print('- Hax loading...')
 #start_chrome(url=urlLogin)
 
 if __name__ == "__main__":
-    webdriver.TARGET_VERSION = 99
-    driver = webdriver.Chrome()
+    uc.TARGET_VERSION = 99
+    driver = uc.Chrome()
     #driver.maximize_window()
     driver.set_window_size(940, 900)
     #driver.get(url)

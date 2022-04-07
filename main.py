@@ -142,7 +142,13 @@ def reCAPTCHA():
     click(S('.recaptcha-checkbox-borderAnimation'))
     #screenshot() # debug
     delay(4)
+    i = 0
     while S('#recaptcha-audio-button').exists():
+        i = i + 1
+        if i > 3:
+            print('*** recaptcha issue! ***')
+            screenshot()
+            break
         print('- audio button found')
         click(S('#recaptcha-audio-button'))
         #screenshot() # debug

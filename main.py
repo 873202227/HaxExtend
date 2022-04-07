@@ -8,8 +8,13 @@ import urllib
 
 import requests
 from helium import *
-from selenium import webdriver
+#from selenium import webdriver
+import undetected_chromedriver as webdriver
+
 from selenium.webdriver.common.by import By
+
+# 关闭证书验证
+ssl._create_default_https_context = ssl._create_unverified_context
 
 try:
     USER_ID = os.environ['USER_ID']
@@ -92,8 +97,7 @@ def getaudiolink():
         except:
             src = Link('或者以 MP3 格式下载音频').href
         print('- get src:', src)
-        # 关闭证书验证
-        ssl._create_default_https_context = ssl._create_unverified_context
+        
         # 下载音频文件
         urllib.request.urlretrieve(src, os.getcwd() + audioFile)
         time.sleep(4)
@@ -149,6 +153,12 @@ def login():
     # if S('@username').exists() is False:
     #     go_to(urlLogin)
     #     login()
+    if Window().title == 'Just a moment...':
+        # debug for submit issue
+        print('*** cloudflare detection ***')
+        time.sleep(7)
+        print('- title after:', Window().title)
+        
     wait_until(Text('Login to Hax.co.id').exists)
     # else:
     print('- fill user id')
@@ -170,6 +180,7 @@ def login():
         block = reCAPTCHA()
         if block:
             print('*** Possibly blocked by google! ***')
+            kill_broowser()
         else:
             submit()
     else:
@@ -183,45 +194,13 @@ def submit():
     scroll_down(num_pixels=500)
     click('Submit')
     print('- submit clicked')
-    driver = get_driver()
-    driver.execute_script('''window.open('',"_blank")''')
-    driver.switch_to.window(driver.window_handles[1])
-    driver.close()
-    time.sleep(4)
-    driver.switch_to.window(driver.window_handles[0])
-    set_driver(driver)
-    get_driver()
-    print('-', Window().title)
-    #print('- title:', Window().title)
-
-    # i = 0
-    # while Window().title == 'Just a moment...':
-    #     if i > 4:
-    #         break
-    #     i = i + 1
-    #     driver = get_driver()
-    #     driver.get_screenshot_as_file(os.getcwd())
-    #     driver.execute_script('''window.open('https://hax.co.id/vps-info',"_blank")''')
-    #     driver.close()
-    #     driver.switch_to.window(driver.window_handles[0])
-    #     print('- wait', i)
-    #     time.sleep(2)
-    #     print('- title:', Window().title)
+    time.sleep(2)
 
     if Window().title == 'Just a moment...':
         # debug for submit issue
-        print('*** reset driver ***')
-        driver = get_driver()
-        # handle = driver.current_window_handle
-        driver.service.stop()
-        time.sleep(6)
-        driver = webdriver.Chrome()
-        # driver.switch_to.window(handle)
-        set_driver(driver)
-        get_driver()
-        print('- title:', Window().title)
-
-
+        print('*** cloudflare detection ***')
+        time.sleep(7)
+        print('- title after:', Window().title)
 
     try:
         wait_until(Text('Please correct your captcha!.').exists)
@@ -245,7 +224,7 @@ def submit():
         screenshot()
         body = ' *** 💣 some error in func submit!, stop running ***'
         # login()
-        push(body)
+        #push(body)
         print(body)
         kill_browser()
 
@@ -389,15 +368,13 @@ block = False
 print('- Hax loading...')
 
 #start_chrome(url=urlLogin)
-options = webdriver.ChromeOptions()
-options.add_experimental_option("excludeSwitches", ["enable-automation"])
-options.add_experimental_option('useAutomationExtension', False)
-options.add_argument("--disable-blink-features=AutomationControlled")
-driver = webdriver.Chrome(options=options)
-driver.get(urlLogin)
-set_driver(driver)
-get_driver()
-print('- title:', Window().title)
 # # 向下滚动
 # scroll_down(num_pixels=550)
-login()
+if __name__ == "__main__":
+    driver = webdriver.Chrome()
+    #driver.get(url)
+    set_driver(driver)
+    get_driver()
+    go_to(urlLogin)
+    print('- title:', Window().title)
+    login()

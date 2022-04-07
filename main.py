@@ -160,11 +160,12 @@ def cloudflareDT():
 def login():
     print('- login')
     time.sleep(1)
+    # CF
     cloudflareDT()
     
         
-    # # 向下滚动 400
-    scroll_down(num_pixels=400)
+    # # 向下滚动
+    scroll_down(num_pixels=240)
     
     wait_until(Text('Login to Hax.co.id').exists)
     # else:
@@ -198,16 +199,12 @@ def login():
 def submit():
     print('- submit')
     # 向下滚动，有时候提示找不到按钮（被其他控件cover）
-    scroll_down(num_pixels=500)
+    #scroll_down(num_pixels=500)
     click('Submit')
     print('- submit clicked')
     time.sleep(2)
 
-    if Window().title == 'Just a moment...':
-        # debug for submit issue
-        print('*** cloudflare detection ***')
-        time.sleep(7)
-        print('- title after:', Window().title)
+    cloudflareDT()
 
     try:
         wait_until(Text('Please correct your captcha!.').exists)
@@ -382,7 +379,8 @@ print('- Hax loading...')
 if __name__ == "__main__":
     webdriver.TARGET_VERSION = 99
     driver = webdriver.Chrome()
-    driver.maximize_window()
+    #driver.maximize_window()
+    driver.set_window_size(940, 900)
     #driver.get(url)
     set_driver(driver)
     get_driver()
@@ -391,8 +389,11 @@ if __name__ == "__main__":
     cloudflareDT()
     # 向下滚动
     scroll_down(num_pixels=480)
-    
-    print('- title:', Window().title)
-    screenshot()
     time.sleep(2)
+    print('- click checkbox')
+    click(S('.recaptcha-checkbox-borderAnimation'))
+    print('- title:', Window().title)
+    time.sleep(2)
+    screenshot()
+    
     #login()

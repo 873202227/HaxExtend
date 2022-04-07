@@ -1,10 +1,10 @@
 # [![HaxExtend](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml)
 #### Dev 记录
-
-|模块|问题|思路|
+workflow 上的浏览器没有广告屏蔽，得重新处理遮罩对元素定位的影响
+|模块|问题/现象|思路|
 |---|---|---|
 |submit|cloud flare 5s|undetected_chromedriver|
-|login|异常跳转到HEVO页面 http://mjjzp.cf/img/2022/04/07/e3a7a57f570a7.png 导致找不到音频按钮|？|
+|login|异常跳转，audio 元素找不到|遮挡问题|
 ||||
 ||||
 

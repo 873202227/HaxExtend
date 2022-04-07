@@ -150,7 +150,7 @@ def reCAPTCHA():
 
 def login():
     print('- login')
-    time.sleep(5)
+    time.sleep(1)
     # if S('@username').exists() is False:
     #     go_to(urlLogin)
     #     login()
@@ -159,6 +159,11 @@ def login():
         print('*** cloudflare detection ***')
         time.sleep(7)
         print('- title after:', Window().title)
+        
+    # # 向下滚动
+    scroll_down(num_pixels=550)
+    
+    screenshot() # debug
         
     wait_until(Text('Login to Hax.co.id').exists)
     # else:
@@ -369,8 +374,7 @@ block = False
 print('- Hax loading...')
 
 #start_chrome(url=urlLogin)
-# # 向下滚动
-# scroll_down(num_pixels=550)
+
 if __name__ == "__main__":
     webdriver.TARGET_VERSION = 99
     driver = webdriver.Chrome()

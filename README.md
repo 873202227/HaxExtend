@@ -1,6 +1,12 @@
 # [![HaxExtend](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml)
-#### 计划
-- TBD
+#### Dev 记录
+
+|模块|问题|思路|
+|---|---|---|
+|submit|cloud flare 5s|undetected_chromedriver|
+|login|异常跳转到HEVO页面 http://mjjzp.cf/img/2022/04/07/e3a7a57f570a7.png 导致找不到音频按钮|？|
+||||
+||||
 
 #### 状态
 - 已知 BUG，submit 提交后页面刷新到 VPS Information 的过程中大概率出现问题，导致下一步renew 无法进行。

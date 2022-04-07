@@ -135,7 +135,7 @@ def getaudiolink():
     else:
         print('*** audio download element not found, stop running ***')
         print('- title:', Window().title)
-        screenshot() # debug
+        #screenshot() # debug
         #refresh()
         #login()
         #renewVPS()
@@ -159,16 +159,16 @@ def cloudflareDT():
         # debug for submit issue
         print('*** cloudflare detection ***')
         delay(10)
-        if Window().title == 'Just a moment...':
-            print('*** cloudflare detection ***')
-            delay(10)
         print('- title after:', Window().title)
 
 def login():
     print('- login')
     delay(1)
     # CF
-    cloudflareDT()
+    try:
+        cloudflareDT()
+    except:
+        pass
     
     wait_until(Text('Login to Hax.co.id').exists)
 
@@ -214,16 +214,19 @@ def submit():
     print('- submit clicked')
     delay(2)
 
-    cloudflareDT()
     try:
-        print('- try go to vps-info')
-        go_to(urlInfo)
-        print('- title:', Window().title)
         cloudflareDT()
-        print('- title:', Window().title)
-
     except:
         pass
+    # try:
+    #     print('- try go to vps-info')
+    #     go_to(urlInfo)
+    #     print('- title:', Window().title)
+    #     cloudflareDT()
+    #     print('- title:', Window().title)
+    #
+    # except:
+    #     pass
 
     try:
         wait_until(Text('Please correct your captcha!.').exists)
@@ -248,7 +251,7 @@ def submit():
         # login()
         #push(body)
         print(body)
-        screenshot() # debug
+        #screenshot() # debug
         #kill_browser()
 
 def delay(i):
@@ -321,7 +324,7 @@ def renewVPS():
         #renewVPS()
         #kill_browser()
         print(' *** 💣 some error in func renew!, stop running ***')
-        screenshot()
+        #screenshot()
 
 
 def extendResult():

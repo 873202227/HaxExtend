@@ -21,7 +21,7 @@ jobs:
             python-version: '3.9.10'
         - name: 'Install requirements'
           run: |
-            python3.9.10 -m pip install -r ./requirements.txt
+            python3 -m pip install -r ./requirements.txt
 #            python3 -m pip install --upgrade pip
         - name: 'Working'
           env:
@@ -32,4 +32,4 @@ jobs:
             TG_USER_ID: ${{ secrets.TG_USER_ID }}
 
           run: |
-            python3.9.10 ./main.py
+            python3 ./main.py

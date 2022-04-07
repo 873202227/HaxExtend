@@ -130,6 +130,7 @@ def getaudiolink():
         block = True
     else:
         print('*** audio download element not found,return to func renew ***')
+        print('- title:', Window().title)
         screenshot() # debug
         refresh()
         login()
@@ -139,12 +140,12 @@ def reCAPTCHA():
     global block
     print('- click checkbox')
     click(S('.recaptcha-checkbox-borderAnimation'))
-    screenshot() # debug
+    #screenshot() # debug
     time.sleep(3)
     while S('#recaptcha-audio-button').exists():
         print('- audio button found')
         click(S('#recaptcha-audio-button'))
-        screenshot() # debug
+        #screenshot() # debug
         time.sleep(3)
         getaudiolink()
     return block

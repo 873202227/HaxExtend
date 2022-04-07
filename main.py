@@ -130,11 +130,11 @@ def getaudiolink():
         push(body)
         block = True
     else:
-        print('*** audio download element not found,return to func renew ***')
+        print('*** audio download element not found, stop running ***')
         print('- title:', Window().title)
         screenshot() # debug
-        refresh()
-        login()
+        #refresh()
+        #login()
         #renewVPS()
 
 def reCAPTCHA():
@@ -142,12 +142,12 @@ def reCAPTCHA():
     print('- click checkbox')
     click(S('.recaptcha-checkbox-borderAnimation'))
     #screenshot() # debug
-    time.sleep(3)
+    time.sleep(4)
     while S('#recaptcha-audio-button').exists():
         print('- audio button found')
         click(S('#recaptcha-audio-button'))
         #screenshot() # debug
-        time.sleep(3)
+        time.sleep(4)
         getaudiolink()
     return block
 
@@ -155,7 +155,7 @@ def cloudflareDT():
     if Window().title == 'Just a moment...':
         # debug for submit issue
         print('*** cloudflare detection ***')
-        time.sleep(7)
+        time.sleep(10)
         print('- title after:', Window().title)
 
 def login():

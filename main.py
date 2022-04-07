@@ -156,6 +156,9 @@ def cloudflareDT():
         # debug for submit issue
         print('*** cloudflare detection ***')
         time.sleep(10)
+        if Window().title == 'Just a moment...':
+            print('*** cloudflare detection ***')
+            time.sleep(10)
         print('- title after:', Window().title)
 
 def login():

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+pygame怎么让角色图片逐帧切换# -*- coding: utf-8 -*-
 # https://github.com/mybdye 🌟
 
 import os
@@ -210,9 +210,9 @@ def submit():
     try:
         wait_until(Text('Please correct your captcha!.').exists)
         print('*** Network issue maybe, reCAPTCHA load fail! ***')
-        go_to(urlLogin)
-        time.sleep(2)
-        login()
+        #go_to(urlLogin)
+        #time.sleep(2)
+        #login()
     except:
         pass
     try:
@@ -389,8 +389,8 @@ if __name__ == "__main__":
     # 向下滚动
     scroll_down(num_pixels=480)
     time.sleep(2)
-    print('- click checkbox')
-    click(S('.recaptcha-checkbox-borderAnimation'))
+    #print('- click checkbox')
+    #click(S('.recaptcha-checkbox-borderAnimation'))
     print('- title:', Window().title)
     time.sleep(2)
     #screenshot()

@@ -6,12 +6,12 @@ import ssl
 import time
 import urllib
 import requests
+import undetected_chromedriver as webdriver
 
 from helium import *
 #from selenium import webdriver
-import undetected_chromedriver as webdriver
-
 from selenium.webdriver.common.by import By
+
 
 # 关闭证书验证
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -51,7 +51,8 @@ imgFile = '\\capture.png'
 urlLogin = 'https://hax.co.id/login'
 urlRenew = 'https://hax.co.id/vps-renew/'
 urlInfo = 'https://hax.co.id/vps-info'
-
+urlSpeech = 'https://speech-to-text-demo.ng.bluemix.net/'
+urlMJJ = 'http://mjjzp.cf/'
 
 def switchToWindowSpeechToText():
     print('- switch to window Speech to Text')
@@ -60,15 +61,13 @@ def switchToWindowSpeechToText():
     else:
         # Selenium open a new window
         driver = get_driver()
-        driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
-        switch_to('Speech to Text')
-
+        driver.tab_new(urlSpeech)
 
 def speechToText():
     # switchToWindowSpeechToText()
     driver = get_driver()
-    driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
-    switch_to('Speech to Text')
+    driver.tab_new(urlSpeech)
+
     # # 向下滚动
     scroll_down(num_pixels=800)
     
@@ -81,7 +80,7 @@ def speechToText():
             break
         attach_file(os.getcwd() + audioFile, 'Upload Audio File')
         print('- waiting for transcribe')
-        time.sleep(6)
+        delay(6)
         textlist = find_all(S('.tab-panels--tab-content'))
         text = [key.web_element.text for key in textlist][0]
         print('- get text:', text)
@@ -101,27 +100,27 @@ def getaudiolink():
         
         # 下载音频文件
         urllib.request.urlretrieve(src, os.getcwd() + audioFile)
-        time.sleep(4)
+        delay(4)
         text = speechToText()
         print('- waiting for switch to hax window')
 
         # 切回第一个 tab
         driver = get_driver()
         driver.switch_to.window(driver.window_handles[0])
-        # time.sleep(3)
+        # delay(3)
         wait_until(S('#audio-response').exists)
         print('- fill audio response')
         write(text, into=S('#audio-response'))
-        # time.sleep(3)
+        # delay(3)
         wait_until(S('#recaptcha-verify-button').exists)
         print('- click recaptcha verify button')
         click(S('#recaptcha-verify-button'))
-        time.sleep(3)
+        delay(3)
         if Text('Multiple correct solutions required - please solve more.').exists() or Text(
                 '需要提供多个正确答案 - 请回答更多问题。').exists():
             print('*** Multiple correct solutions required - please solve more. ***')
             getaudiolink()
-        time.sleep(1)
+        delay(1)
 
     elif Text('Try again later').exists() or Text('稍后重试').exists():
         textblock = S('.rc-doscaptcha-body-text').web_element.text
@@ -142,12 +141,12 @@ def reCAPTCHA():
     print('- click checkbox')
     click(S('.recaptcha-checkbox-borderAnimation'))
     #screenshot() # debug
-    time.sleep(4)
+    delay(4)
     while S('#recaptcha-audio-button').exists():
         print('- audio button found')
         click(S('#recaptcha-audio-button'))
         #screenshot() # debug
-        time.sleep(4)
+        delay(4)
         getaudiolink()
     return block
 
@@ -155,15 +154,15 @@ def cloudflareDT():
     if Window().title == 'Just a moment...':
         # debug for submit issue
         print('*** cloudflare detection ***')
-        time.sleep(10)
+        delay(10)
         if Window().title == 'Just a moment...':
             print('*** cloudflare detection ***')
-            time.sleep(10)
+            delay(10)
         print('- title after:', Window().title)
 
 def login():
     print('- login')
-    time.sleep(1)
+    delay(1)
     # CF
     cloudflareDT()
     
@@ -209,7 +208,7 @@ def submit():
     #scroll_down(num_pixels=500)
     click('Submit')
     print('- submit clicked')
-    time.sleep(2)
+    delay(2)
 
     cloudflareDT()
     try:
@@ -226,7 +225,7 @@ def submit():
         wait_until(Text('Please correct your captcha!.').exists)
         print('*** Network issue maybe, reCAPTCHA load fail! ***')
         #go_to(urlLogin)
-        #time.sleep(2)
+        #delay(2)
         #login()
     except:
         pass
@@ -248,14 +247,17 @@ def submit():
         screenshot() # debug
         #kill_browser()
 
+def delay(i):
+    time.sleep(i)
+
 def screenshot(): # debug
     driver = get_driver()
     driver.get_screenshot_as_file(os.getcwd() + imgFile)
     print('- screenshot done')
-    driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
-    switch_to('白嫖图床')
+    driver.tab_new(urlMJJ)
+    delay(2)
     driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
-    time.sleep(4)
+    delay(4)
     click('上传')
     wait_until(Text('完成').exists)
     print('- upload done')
@@ -267,17 +269,16 @@ def screenshot(): # debug
     driver.switch_to.window(driver.window_handles[0])
 
 
-
 def renewVPS():
     global block
     print('- renew VPS')
     go_to(urlRenew)
-    time.sleep(1)
+    delay(1)
     cloudflareDT()
     # 向下滚动
     scroll_down(num_pixels=930)
     
-    time.sleep(1)
+    delay(1)
     if S('#web_address').exists():
         print('- fill web address')
         write('hax.co.id', into=S('#web_address'))
@@ -308,7 +309,7 @@ def renewVPS():
             body = '🎉 ' + body
         print('- extend result:', body)
         push(body)
-        #time.sleep(2)
+        #delay(2)
         #kill_browser()
     else:
         #renewVPS()
@@ -319,7 +320,7 @@ def renewVPS():
 
 def extendResult():
     print('- waiting for extend result response')
-    time.sleep(10)
+    delay(10)
     if S('#response').exists():
         # 向下滚动
         scroll_down(num_pixels=300)
@@ -399,5 +400,5 @@ if __name__ == "__main__":
     set_driver(driver)
     get_driver()
     go_to(urlLogin)
-    time.sleep(2)
+    delay(2)
     login()

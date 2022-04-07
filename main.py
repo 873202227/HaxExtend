@@ -6,7 +6,7 @@ import ssl
 import time
 import urllib
 import requests
-import undetected_chromedriver as uc
+import undetected_chromedriver.v2 as uc
 
 from helium import *
 #from selenium import webdriver
@@ -407,10 +407,27 @@ print('- Hax loading...')
 
 if __name__ == "__main__":
     #uc.TARGET_VERSION = 99
-    driver = uc.Chrome(options=options)
+    #driver = uc.Chrome(options=options)
     #driver.maximize_window()
-    driver.set_window_size(940, 900)
+    #driver.set_window_size(940, 900)
     #driver.get(url)
+    #set_driver(driver)
+    #get_driver()
+    #go_to(urlLogin)
+    #print('cloudflare detection test')
+    #go_to('https://nowsecure.nl')
+    #print('- title before:', Window().title)
+    #delay(10)
+    #print('- title after:', Window().title)
+    #login()
+    options = uc.ChromeOptions()
+    options.add_argument(f'--no-first-run --no-service-autorun --password-store=basic')
+    options.user_data_dir = f'./tmp/test_undetected_chromedriver'
+    options.add_argument(f'--disable-gpu')
+    options.add_argument(f'--no-sandbox')
+    options.add_argument(f'--disable-dev-shm-usage')
+    driver = uc.Chrome(options=options, headless=False)
+    
     set_driver(driver)
     get_driver()
     #go_to(urlLogin)
@@ -419,4 +436,3 @@ if __name__ == "__main__":
     print('- title before:', Window().title)
     delay(10)
     print('- title after:', Window().title)
-    #login()

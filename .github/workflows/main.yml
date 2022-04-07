@@ -2,9 +2,9 @@ name: 'HaxExtend'
 
 on:
   #push:
-  schedule:
+  #schedule:
     # UTC time (国内 UTC+8)
-     - cron: '30 4 * * *'
+    # - cron: '30 4 * * *'
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 

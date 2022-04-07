@@ -130,6 +130,7 @@ def getaudiolink():
         block = True
     else:
         print('*** audio download element not found,return to func renew ***')
+        screenshot() # debug
         refresh()
         login()
         #renewVPS()
@@ -221,14 +222,14 @@ def submit():
         renewVPS()
     except:
         print('- title:', Window().title)
-        screenshot()
+        screenshot() # debug
         body = ' *** 💣 some error in func submit!, stop running ***'
         # login()
         #push(body)
         print(body)
         kill_browser()
 
-def screenshot():
+def screenshot(): # debug
     driver = get_driver()
     driver.get_screenshot_as_file(os.getcwd() + imgFile)
     print('- screenshot done')

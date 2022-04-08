@@ -1,10 +1,12 @@
 # [![HaxExtend](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml)
-#### 修补计划（dev 分支）
-- submit 处理 cloudflare 5s
-- 其他 处理元素被遮挡
+#### Dev 记录
+##### To Do List
+- [ ] cloud flare 5s, undetected_chromedriver 难搞哦
+- [x] login, 异常跳转,audio 元素找不到, 元素遮挡问题
+
 
 #### 状态
-- 不可用
+- 
 
 #### 项目进度
 - 0330 添加了 tg push，`func submit` 也还有些 ~~小~~ 问题

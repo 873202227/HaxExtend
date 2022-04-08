@@ -1,7 +1,15 @@
 # [![HaxExtend](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/HaxExtend/actions/workflows/main.yml)
 #### Dev 记录
 ##### To Do List
-- [ ] cloud flare 5s, undetected_chromedriver 难搞哦
+- [ ] cloud flare 5s, undetected_chromedriver (30s!!!)
+```
+- Hax loading...
+cloudflare detection test
+- title before: Just a moment...
+- title after 10s: Just a moment...
+- title after 20s: Just a moment...
+- title after 30s: nowSecure
+```
 - [x] login, 异常跳转,audio 元素找不到, 元素遮挡问题
 
 

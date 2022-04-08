@@ -71,12 +71,17 @@ def speechToText():
     # driver = get_driver()
     # get_driver().execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
     driver.tab_new(urlSpeech)
+    delay(5)
+    all_handles = driver.window_handles  # 获取所有窗口句柄
+    print('all_handles:', all_handles)
     delay(2)
-    print('- new tab title:', Window.title())
-    # switch_to('Speech to Text')
-    driver.switch_to.window(driver.window_handles[0])
-    delay(2)
-    print('- origin tab title:', Window.title())
+    driver.switch_to.window(all_handles[1])
+    if Text('Speech to Text').exists():
+        print('Speech to Text')
+    print('new tab title:', Window().title)
+    driver.switch_to.window(now_handle)
+    print('origin tab title:', Window().title)
+    delay(60)
 
     # # 向下滚动
     scroll_down(num_pixels=800)
@@ -140,7 +145,7 @@ def getaudiolink():
         block = True
     else:
         print('*** audio download element not found, stop running ***')
-        print('- title:', Window().title)
+        #print('- title:', Window().title)
         #screenshot() # debug
         #refresh()
         #login()
@@ -162,12 +167,12 @@ def reCAPTCHA():
 
 def cloudflareDT():
     i = 0
-    while Window().title == 'Just a moment...':
-        # debug for submit issue
-        print('*** cloudflare detection ***')
-        delay(5)
-        print(i+1)
-        print('- title after:', Window().title)
+    while Text('Checking your browser before accessing').exists():
+        i = i + 1
+        print('*** cloudflare 5s detection *** ', i)
+        time.sleep(1)
+    print('*** cf 5s detection *** finish!')
+
 
 def login():
     print('- login')
@@ -181,7 +186,8 @@ def login():
     while Text('Submit').exists() == False:
         # 向下滚动
         scroll_down(num_pixels=50)
-        print('- 50px *', i+1)
+        i = i + 1
+        print('- 50px * ', i)
 
     # else:
     print('- fill user id')
@@ -239,7 +245,7 @@ def submit():
         print('- VPS Information found!')
         renewVPS()
     except:
-        print('- title:', Window().title)
+        #print('- title:', Window().title)
         body = ' *** 💣 some error in func submit!, stop running ***'
         # login()
         #push(body)
@@ -393,14 +399,16 @@ block = False
 print('- Hax loading...')
 #start_chrome(url=urlLogin)
 
-if __name__ == "__main__":
-    #uc.TARGET_VERSION = 99
-    driver = uc.Chrome()
-    #driver.maximize_window()
-    driver.set_window_size(785, 627)
-    #driver.get(url)
-    set_driver(driver)
-    get_driver()
-    go_to(urlLogin)
-    #login()
-    speechToText()
+#if __name__ == "__main__":
+#uc.TARGET_VERSION = 99
+#driver = uc.Chrome()
+#driver.maximize_window()
+driver = uc.Chrome(use_subprocess=True)
+driver.set_window_size(785, 627)
+delay(2)
+set_driver(driver)
+go_to(urlLogin)
+#login()
+now_handle = driver.current_window_handle #获取当前窗口句柄
+print('now_handle:', now_handle)   #输出当前获取的窗口句柄
+speechToText()

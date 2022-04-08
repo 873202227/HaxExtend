@@ -155,20 +155,19 @@ def reCAPTCHA():
         return block
 
 def cloudflareDT():
-    if Window().title == 'Just a moment...':
+    i = 0
+    while Window().title == 'Just a moment...':
         # debug for submit issue
         print('*** cloudflare detection ***')
-        delay(10)
+        delay(5)
+        print(i+1)
         print('- title after:', Window().title)
 
 def login():
     print('- login')
     delay(1)
     # CF
-    try:
-        cloudflareDT()
-    except:
-        pass
+    cloudflareDT()
     
     wait_until(Text('Login to Hax.co.id').exists)
 
@@ -214,19 +213,7 @@ def submit():
     print('- submit clicked')
     delay(2)
 
-    try:
-        cloudflareDT()
-    except:
-        pass
-    # try:
-    #     print('- try go to vps-info')
-    #     go_to(urlInfo)
-    #     print('- title:', Window().title)
-    #     cloudflareDT()
-    #     print('- title:', Window().title)
-    #
-    # except:
-    #     pass
+    cloudflareDT()
 
     try:
         wait_until(Text('Please correct your captcha!.').exists)
@@ -408,16 +395,5 @@ if __name__ == "__main__":
     #driver.get(url)
     set_driver(driver)
     get_driver()
-    #go_to(urlLogin)
-    print('cloudflare detection test')
-    #driver.get('https://nowsecure.nl')
-    go_to('https://nowsecure.nl')
-
-    print('- title before:', Window().title)
-    delay(10)
-    print('- title after 10s:', Window().title)
-    delay(10)
-    print('- title after 20s:', Window().title)
-    delay(10)
-    print('- title after 30s:', Window().title)
-    #login()
+    go_to(urlLogin)
+    login()

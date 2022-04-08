@@ -72,11 +72,11 @@ def speechToText():
     # get_driver().execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
     driver.tab_new(urlSpeech)
     delay(2)
-    print('- new tab title:', Window.title())
+    print('- new tab title:', Window().title)
     # switch_to('Speech to Text')
     driver.switch_to.window(driver.window_handles[0])
     delay(2)
-    print('- origin tab title:', Window.title())
+    print('- origin tab title:', Window().title)
 
     # # 向下滚动
     scroll_down(num_pixels=800)

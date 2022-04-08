@@ -46,8 +46,8 @@ except:
     # 本地调试用
     TG_USER_ID = ''
 
-audioFile = '\\audio.mp3'
-imgFile = '\\capture.png'
+audioFile = '/audio.mp3'
+imgFile = '/capture.png'
 urlLogin = 'https://hax.co.id/login'
 urlRenew = 'https://hax.co.id/vps-renew/'
 urlInfo = 'https://hax.co.id/vps-info'

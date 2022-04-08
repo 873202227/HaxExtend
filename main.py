@@ -404,7 +404,7 @@ if __name__ == "__main__":
     uc.TARGET_VERSION = 99
     driver = uc.Chrome()
     #driver.maximize_window()
-    driver.set_window_size(940, 900)
+    driver.set_window_size(785, 627)
     #driver.get(url)
     set_driver(driver)
     get_driver()

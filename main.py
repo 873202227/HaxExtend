@@ -413,5 +413,7 @@ if __name__ == "__main__":
     driver.get('https://nowsecure.nl')
     print('- title before:', driver.title)
     delay(10)
-    print('- title after:', driver.title)
+    print('- title after 10s:', driver.title)
+    delay(20)
+    print('- title after 30s:', driver.title)
     #login()

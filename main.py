@@ -401,7 +401,7 @@ print('- Hax loading...')
 #start_chrome(url=urlLogin)
 
 if __name__ == "__main__":
-    uc.TARGET_VERSION = 99
+    #uc.TARGET_VERSION = 99
     driver = uc.Chrome()
     #driver.maximize_window()
     driver.set_window_size(785, 627)

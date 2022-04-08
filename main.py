@@ -68,9 +68,15 @@ urlMJJ = 'http://mjjzp.cf/'
 def speechToText():
     # switchToWindowSpeechToText()
     # driver = get_driver()
-    driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
+    # driver = get_driver()
+    # get_driver().execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
+    driver.tab_new(urlSpeech)
+    delay(2)
+    print('- new tab title:', Window.title())
     # switch_to('Speech to Text')
-    driver.switch_to.window(driver.window_handles[1])
+    driver.switch_to.window(driver.window_handles[0])
+    delay(2)
+    print('- origin tab title:', Window.title())
 
     # # 向下滚动
     scroll_down(num_pixels=800)
@@ -396,4 +402,5 @@ if __name__ == "__main__":
     set_driver(driver)
     get_driver()
     go_to(urlLogin)
-    login()
+    #login()
+    speechToText()

@@ -393,14 +393,14 @@ block = False
 print('- Hax loading...')
 #start_chrome(url=urlLogin)
 
-if __name__ == "__main__":
-    #uc.TARGET_VERSION = 99
-    driver = uc.Chrome()
-    #driver.maximize_window()
-    driver.set_window_size(785, 627)
-    #driver.get(url)
-    set_driver(driver)
-    get_driver()
-    go_to(urlLogin)
-    #login()
-    speechToText()
+#if __name__ == "__main__":
+#uc.TARGET_VERSION = 99
+driver = uc.Chrome(use_subprocess=True)
+#driver.maximize_window()
+driver.set_window_size(785, 627)
+#driver.get(url)
+set_driver(driver)
+get_driver()
+go_to(urlLogin)
+#login()
+speechToText()

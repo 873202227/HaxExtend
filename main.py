@@ -54,23 +54,22 @@ urlInfo = 'https://hax.co.id/vps-info'
 urlSpeech = 'https://speech-to-text-demo.ng.bluemix.net/'
 urlMJJ = 'http://mjjzp.cf/'
 
-def switchToWindowSpeechToText():
-    print('- switch to window Speech to Text')
-    if Window('Speech to Text').exists():
-        switch_to('Speech to Text')
-    else:
-        # Selenium open a new window
-        driver = get_driver()
-        #driver.tab_new(urlSpeech)
-        driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
-        switch_to('Speech to Text')
+# def switchToWindowSpeechToText():
+#     print('- switch to window Speech to Text')
+#     if Window('Speech to Text').exists():
+#         switch_to('Speech to Text')
+#     else:
+#         # Selenium open a new window
+#         driver = get_driver()
+#         #driver.tab_new(urlSpeech)
+#         driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
+#         switch_to('Speech to Text')
 
 def speechToText():
     # switchToWindowSpeechToText()
-    driver = get_driver()
-    #driver.tab_new(urlSpeech)
+    # driver = get_driver()
     driver.execute_script('''window.open('https://speech-to-text-demo.ng.bluemix.net/',"_blank")''')
-    #switch_to('Speech to Text')
+    # switch_to('Speech to Text')
     driver.switch_to.window(driver.window_handles[1])
 
     # # 向下滚动
@@ -110,7 +109,7 @@ def getaudiolink():
         print('- waiting for switch to hax window')
 
         # 切回第一个 tab
-        driver = get_driver()
+        # driver = get_driver()
         driver.switch_to.window(driver.window_handles[0])
         # delay(3)
         wait_until(S('#audio-response').exists)
@@ -245,25 +244,25 @@ def submit():
 def delay(i):
     time.sleep(i)
 
-def screenshot(): # debug
-    driver = get_driver()
-    driver.get_screenshot_as_file(os.getcwd() + imgFile)
-    print('- screenshot done')
-    #driver.tab_new(urlMJJ)
-    driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
-    switch_to('白嫖图床')
-    delay(2)
-    driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
-    delay(4)
-    click('上传')
-    wait_until(Text('完成').exists)
-    print('- upload done')
-    # textList = find_all(S('#code-url'))
-    # result = [key.web_element.text for key in textList][0]
-    result = S('#code-url').web_element.text
-    print('*** capture src:', result)
-    driver.close()
-    driver.switch_to.window(driver.window_handles[0])
+# def screenshot(): # debug
+#     driver = get_driver()
+#     driver.get_screenshot_as_file(os.getcwd() + imgFile)
+#     print('- screenshot done')
+#     #driver.tab_new(urlMJJ)
+#     driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
+#     switch_to('白嫖图床')
+#     delay(2)
+#     driver.find_element(By.ID, 'image').send_keys(os.getcwd()+imgFile)
+#     delay(4)
+#     click('上传')
+#     wait_until(Text('完成').exists)
+#     print('- upload done')
+#     # textList = find_all(S('#code-url'))
+#     # result = [key.web_element.text for key in textList][0]
+#     result = S('#code-url').web_element.text
+#     print('*** capture src:', result)
+#     driver.close()
+#     driver.switch_to.window(driver.window_handles[0])
 
 
 def renewVPS():
@@ -366,7 +365,7 @@ def funcCAPTCHA():
     # 取计算方法
     method = [key.web_element.text for key in divList][0][0]
     # Helium 下没有好的方法拿到两个小图片的 src，切换到 selenium
-    driver = get_driver()
+    # driver = get_driver()
     number1 = int(driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[1]').get_attribute('src').split('-')[1][0])
     number2 = int(driver.find_element(By.XPATH, '//*[@id="form-submit"]/div[2]/div[1]/img[2]').get_attribute('src').split('-')[1][0])
 

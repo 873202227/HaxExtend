@@ -1,4 +1,4 @@
 urllib3
 requests
 helium
-undetected-chromedriver==3.1.5.post4
+undetected-chromedriver==3.1.0
